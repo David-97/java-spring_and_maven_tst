@@ -7,9 +7,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -26,7 +28,6 @@ public class Application implements CommandLineRunner {
     
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 		
 		log.info("Create table");
 		
@@ -36,11 +37,13 @@ public class Application implements CommandLineRunner {
 		List<Object[]> name_split = Arrays.asList("John Woo", "Jeff Dean", "Josh Bloch", "Josh Long")
 				.stream().map(name -> name.split(" ")).collect(Collectors.toList());
 		
+		log.info("insert");
 		name_split.forEach(name -> log.info(String.format("Insert as first name and last name %s %s", name[0], name[1])));
 		
 		
 		jdbc.batchUpdate("INSERT INTO Customers(first_name, last_name) VALUES(?,?)",name_split);
-	
+		
+		log.info("Select all");
 		jdbc.query("SELECT * from Customers", 
 				(rs, row_num) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name")))
 				.forEach(customer -> log.info(customer.toString()));
