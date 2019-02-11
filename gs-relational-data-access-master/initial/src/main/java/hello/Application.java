@@ -48,6 +48,9 @@ public class Application implements CommandLineRunner {
 				(rs, row_num) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name")))
 				.forEach(customer -> log.info(customer.toString()));
 		
+		String f_name = jdbc.queryForObject("select first_name from Customers where last_name = 'Dean'", String.class);
+	
+		System.out.println("first name where last name = Dean: " + f_name);
 	}
 	
 }

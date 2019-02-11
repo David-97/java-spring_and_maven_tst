@@ -28,7 +28,8 @@ public class App
 		dmds.setPassword("");
 		JdbcTemplate jdbclocal = new JdbcTemplate(dmds);
 		
-		jdbclocal.update("insert into Orders(Id_customer, Id_item, Sum) values(?,?,?)", 15, 1, 50398);
+		//insert
+		//jdbclocal.update("insert into Orders(Id_customer, Id_item, Sum) values(?,?,?)", 15, 1, 50398);
 		
 		List<Map<String, Object>> allRecords = jdbclocal.queryForList("select * from Orders");
 		
