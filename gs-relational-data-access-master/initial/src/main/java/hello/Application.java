@@ -44,7 +44,7 @@ public class Application implements CommandLineRunner {
 		jdbc.batchUpdate("INSERT INTO Customers(first_name, last_name) VALUES(?,?)",name_split);
 		
 		log.info("Select all");
-		jdbc.query("SELECT * from Customers", 
+		jdbc.query("SELECT * from Customers",
 				(rs, row_num) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name")))
 				.forEach(customer -> log.info(customer.toString()));
 		

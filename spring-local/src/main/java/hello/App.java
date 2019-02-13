@@ -1,23 +1,26 @@
 package hello;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class App 
+@SpringBootApplication
+public class App implements	CommandLineRunner
 {
     public static void main( String[] args )
     {
+    	SpringApplication.run(App.class, args);
+    	
+    }
+    	@Override
+    	public void run(String... args) throws Exception {
+    		
+    	
         System.out.println( "Hello World!" );
         
 		DriverManagerDataSource dmds = new DriverManagerDataSource();
@@ -40,5 +43,6 @@ public class App
 		
 		System.out.println("\n select id of order where id_cus = 9: " + name);
 		
-    }
+    	}
+    
 }
